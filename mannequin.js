@@ -87,10 +87,13 @@
     const bend = Object.assign({}, DEFAULT_BEND[view === 'front' ? 'front' : 'side'], move.bend || {});
 
     p.arms = {}; p.legs = {};
-    // optional per-side shoulder offsets (e.g. trunk rotation seen from the side)
+    // optional per-side shoulder offsets (e.g. trunk rotation seen from the side); applied to the key poses too,
+    // so shoulder-relative hand targets stay consistent while blending
+    const off = (k, s) => (k.shoulders && k.shoulders[s]) || [0, 0];
     for (const s of sides(move)) {
-      const o0 = (k0.shoulders && k0.shoulders[s]) || [0, 0], o1 = (k1.shoulders && k1.shoulders[s]) || [0, 0];
-      p.shoulder[s] = add(p.shoulder[s], lerp2(o0, o1, u));
+      p0.shoulder[s] = add(p0.shoulder[s], off(k0, s));
+      p1.shoulder[s] = add(p1.shoulder[s], off(k1, s));
+      p.shoulder[s] = add(p.shoulder[s], lerp2(off(k0, s), off(k1, s), u));
     }
     for (const s of sides(move)) {
       const hT = blendTarget(k0.hands[s], k1.hands[s], u, p0, p1, p, s);
