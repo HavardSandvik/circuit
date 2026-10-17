@@ -1,0 +1,253 @@
+{
+ "id": "reverse-lunges",
+ "name": "Reverse lunges",
+ "view": "side",
+ "duration": 4.0,
+ "cues": [
+  "Step one foot back and lower the back knee towards the floor",
+  "Front knee stays over the ankle",
+  "Push through the front heel to stand; alternate legs"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    0,
+    0.95
+   ],
+   "torso": 2,
+   "hands": {
+    "near": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    },
+    "far": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 0.4,
+   "pelvis": [
+    -0.1,
+    0.86
+   ],
+   "torso": 2,
+   "hands": {
+    "near": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    },
+    "far": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.35,
+      0.22
+     ],
+     "f": -15
+    },
+    "far": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 1.0,
+   "pelvis": [
+    -0.25,
+    0.56
+   ],
+   "torso": 4,
+   "hands": {
+    "near": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    },
+    "far": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.78,
+      0.2
+     ],
+     "f": -45
+    },
+    "far": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 2.0,
+   "pelvis": [
+    0,
+    0.95
+   ],
+   "torso": 2,
+   "hands": {
+    "near": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    },
+    "far": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 2.4,
+   "pelvis": [
+    -0.1,
+    0.86
+   ],
+   "torso": 2,
+   "hands": {
+    "near": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    },
+    "far": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      -0.35,
+      0.22
+     ],
+     "f": -15
+    }
+   }
+  },
+  {
+   "t": 3.0,
+   "pelvis": [
+    -0.25,
+    0.56
+   ],
+   "torso": 4,
+   "hands": {
+    "near": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    },
+    "far": {
+     "from": "pelvis",
+     "d": [
+      0.0,
+      0.08
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      -0.78,
+      0.2
+     ],
+     "f": -45
+    }
+   }
+  }
+ ]
+}

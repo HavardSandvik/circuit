@@ -1,0 +1,149 @@
+{
+ "id": "jumping-jacks",
+ "name": "Jumping jacks",
+ "view": "front",
+ "duration": 1.1,
+ "cues": [
+  "Land softly on the balls of your feet",
+  "Arms fully overhead, then back to your sides",
+  "Keep a steady rhythm"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    0,
+    0.95
+   ],
+   "torso": 0,
+   "hands": {
+    "left": [
+     -0.22,
+     0.88
+    ],
+    "right": [
+     0.22,
+     0.88
+    ]
+   },
+   "feet": {
+    "left": {
+     "at": [
+      -0.1,
+      0.085
+     ],
+     "f": 0
+    },
+    "right": {
+     "at": [
+      0.1,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 0.275,
+   "pelvis": [
+    0,
+    1.04
+   ],
+   "torso": 0,
+   "hands": {
+    "left": [
+     -0.72,
+     1.5
+    ],
+    "right": [
+     0.72,
+     1.5
+    ]
+   },
+   "feet": {
+    "left": {
+     "at": [
+      -0.22,
+      0.22
+     ],
+     "f": 0
+    },
+    "right": {
+     "at": [
+      0.22,
+      0.22
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 0.55,
+   "pelvis": [
+    0,
+    0.92
+   ],
+   "torso": 0,
+   "hands": {
+    "left": [
+     -0.14,
+     1.94
+    ],
+    "right": [
+     0.14,
+     1.94
+    ]
+   },
+   "feet": {
+    "left": {
+     "at": [
+      -0.34,
+      0.085
+     ],
+     "f": 0
+    },
+    "right": {
+     "at": [
+      0.34,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 0.825,
+   "pelvis": [
+    0,
+    1.04
+   ],
+   "torso": 0,
+   "hands": {
+    "left": [
+     -0.72,
+     1.5
+    ],
+    "right": [
+     0.72,
+     1.5
+    ]
+   },
+   "feet": {
+    "left": {
+     "at": [
+      -0.22,
+      0.22
+     ],
+     "f": 0
+    },
+    "right": {
+     "at": [
+      0.22,
+      0.22
+     ],
+     "f": 0
+    }
+   }
+  }
+ ]
+}

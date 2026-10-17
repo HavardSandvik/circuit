@@ -17,16 +17,16 @@
 /* Layout: one-screen gym clock — phase band, big ring timer, controls, then the 7-station board */
 :root{
   --bg:#eef0ec; --surface:#ffffff; --fg:#14202b; --muted:#5d6a72; --line:#d3d8d3;
-  --work:#e0461f; --rest:#1f8a7a; --ready:#c99a14; --track:#dde2dc;
+  --work:#e0461f; --rest:#1f8a7a; --ready:#c99a14; --track:#dde2dc; --fig:#14202b; --fig-far:#a3aca8;
   --display:"Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
   --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
   --bg:#10171d; --surface:#18222a; --fg:#e9eee9; --muted:#93a1a8; --line:#2a3741;
-  --work:#ff6a3d; --rest:#3cc2ad; --ready:#e5b931; --track:#24313a; color-scheme:dark}}
+  --work:#ff6a3d; --rest:#3cc2ad; --ready:#e5b931; --track:#24313a; --fig:#e9eee9; --fig-far:#566770; color-scheme:dark}}
 :root[data-theme="dark"]{
   --bg:#10171d; --surface:#18222a; --fg:#e9eee9; --muted:#93a1a8; --line:#2a3741;
-  --work:#ff6a3d; --rest:#3cc2ad; --ready:#e5b931; --track:#24313a; color-scheme:dark}
+  --work:#ff6a3d; --rest:#3cc2ad; --ready:#e5b931; --track:#24313a; --fig:#e9eee9; --fig-far:#566770; color-scheme:dark}
 
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;
@@ -40,12 +40,15 @@ h1{font-family:var(--display);font-weight:900;font-size:28px;letter-spacing:.02e
 .clock[data-phase="work"]{--c:var(--work)}
 .clock[data-phase="rest"]{--c:var(--rest)}
 .phase{font-family:var(--display);font-weight:800;font-size:15px;letter-spacing:.2em;text-transform:uppercase;color:var(--c)}
-.ring{position:relative;width:min(260px,70vw);aspect-ratio:1;max-width:100%}
+.ring{position:relative;width:min(220px,58vw);aspect-ratio:1;max-width:100%}
 .ring svg{width:100%;height:100%;transform:rotate(-90deg)}
 .ring .trk{fill:none;stroke:var(--track);stroke-width:10}
 .ring .arc{fill:none;stroke:var(--c);stroke-width:10;stroke-linecap:round;transition:stroke .3s}
-.secs{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:min(112px,30vw);line-height:1;font-variant-numeric:tabular-nums}
+.secs{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:min(96px,26vw);line-height:1;font-variant-numeric:tabular-nums}
 .exercise{font-family:var(--display);font-weight:800;font-size:34px;text-transform:uppercase;letter-spacing:.01em;text-align:center;line-height:1.05;text-wrap:balance}
+.demo{width:100%;height:130px;display:block;max-width:100%}
+.demo-row{width:100%;display:flex;flex-direction:column;align-items:center;gap:2px}
+.link{background:none;border:0;padding:4px 6px;color:var(--muted);font-size:13px;font-weight:500;text-decoration:underline;text-underline-offset:3px}
 .next{font-size:14px;color:var(--muted);min-height:1.4em;text-align:center}
 .next b{color:var(--fg);font-weight:600}
 
@@ -60,7 +63,7 @@ button:disabled{opacity:.4;cursor:default}
 .toggles input{accent-color:var(--work);width:18px;height:18px}
 
 .board{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.board li{display:grid;grid-template-columns:2.2em 1fr auto;align-items:center;gap:8px;padding:10px 4px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.board li{display:grid;grid-template-columns:2.2em 1fr auto auto;align-items:center;gap:8px;padding:10px 4px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
 .board .n{font-family:var(--display);font-weight:800;font-size:18px;color:var(--muted)}
 .board .t{font-size:13px;color:var(--muted)}
 .board li.done{opacity:.45}
@@ -68,6 +71,16 @@ button:disabled{opacity:.4;cursor:default}
 .board li.now{background:color-mix(in srgb,var(--work) 12%,transparent);border-radius:8px}
 .board li.now .n{color:var(--work)}
 .board li.now .name{font-weight:600}
+.board .show{padding:6px 10px;font-size:13px;border-radius:999px}
+.sheet{position:fixed;inset:0;z-index:20;background:color-mix(in srgb,var(--fg) 45%,transparent);display:flex;align-items:flex-end;justify-content:center}
+.sheet-card{background:var(--surface);color:var(--fg);width:100%;max-width:480px;border-radius:18px 18px 0 0;
+  padding-block:18px calc(20px + env(safe-area-inset-bottom,0px));padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:12px;max-height:92vh;overflow:auto}
+.sheet-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sheet h2{font-family:var(--display);font-weight:800;font-size:28px;text-transform:uppercase;margin:0;line-height:1.05}
+.sheet canvas{width:100%;height:min(300px,42vh);display:block;background:var(--bg);border-radius:12px}
+.sheet ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.sheet-nav{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .note{font-size:12.5px;color:var(--muted);margin:0}
 @media (prefers-reduced-motion:reduce){.ring .arc{transition:none}}
 </style>
@@ -90,6 +103,7 @@ button:disabled{opacity:.4;cursor:default}
       <div class="secs" id="secs">10</div>
     </div>
     <div class="exercise" id="ex">Jumping jacks</div>
+    <div class="demo-row"><canvas class="demo" id="demo" aria-label="Animated demonstration"></canvas><button class="link" id="howNow" type="button">How to do it</button></div>
     <div class="next" id="next">40s on · 20s off · 7 stations</div>
   </section>
 
@@ -106,9 +120,18 @@ button:disabled{opacity:.4;cursor:default}
   </div>
 
   <ol class="board" id="board"></ol>
+  <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+    <div class="sheet-card">
+      <div class="sheet-head"><h2 id="sheetTitle">Exercise</h2><button id="sheetClose" type="button">Close</button></div>
+      <canvas id="sheetCanvas" aria-label="Animated demonstration"></canvas>
+      <ul id="sheetCues"></ul>
+      <div class="sheet-nav"><button id="sheetPrev" type="button">Previous</button><button id="sheetNext" type="button">Next</button></div>
+    </div>
+  </div>
   <p class="note">Keep this page open and on screen while you train. Your phone's silent switch may mute the beeps.</p>
 </div>
 
+<script src="mannequin.js"></script>
 <script>
 const EX=["Jumping jacks","Pull-ups","Bodyweight squats","Mountain climbers","Reverse lunges","Plank shoulder taps","Burpees"];
 const WORK=40, REST=20, READY=10;
@@ -121,7 +144,7 @@ let step=0, remaining=plan[0].dur*1000, endAt=0, running=false, timer=null, last
 let ctx=null, wake=null;
 
 const board=$("board");
-board.innerHTML=EX.map((e,i)=>`<li data-i="${i}"><span class="n">${i+1}</span><span class="name">${e}</span><span class="t">0:${String(i).padStart(1,"0")}0–${i+1}:00</span></li>`).join("");
+board.innerHTML=EX.map((e,i)=>`<li data-i="${i}"><span class="n">${i+1}</span><span class="name">${e}</span><span class="t"></span><button class="show" type="button" data-i="${i}" aria-label="Show ${e}">Show</button></li>`).join("");
 board.querySelectorAll(".t").forEach((t,i)=>t.textContent=`${i}:00–${i}:40`);
 
 function opt(id){return $(id).checked}
@@ -205,6 +228,33 @@ $("go").addEventListener("click",()=>running?pause():start());
 $("reset").addEventListener("click",reset);
 $("skip").addEventListener("click",()=>{if(finished)return; if(step+1<plan.length){enter(step+1);if(running)endAt=performance.now()+remaining;}else finish();});
 render();$("total").textContent="7:00 total";
+/* exercise demos */
+const IDS=["jumping-jacks","pull-ups","bodyweight-squats","mountain-climbers","reverse-lunges","plank-shoulder-taps","burpees"];
+const MOVES=[]; let demoIdx=-1, sheetIdx=0;
+const demoPlayer=Mannequin.Player($("demo")), sheetPlayer=Mannequin.Player($("sheetCanvas"));
+Promise.all(IDS.map(id=>fetch("moves/"+id+".json").then(r=>r.json()))).then(ms=>{ms.forEach((m,i)=>MOVES[i]=m);syncDemo(true)}).catch(()=>{$("demo").hidden=true});
+function currentIdx(){return finished?0:plan[step].i}
+function syncDemo(force){
+  const i=currentIdx();
+  if(!MOVES[i]||(!force&&i===demoIdx))return;
+  demoIdx=i; demoPlayer.set(MOVES[i]).play();
+}
+const _render=render; render=function(){_render();syncDemo(false)};
+function openSheet(i){
+  if(!MOVES[i])return; sheetIdx=i;
+  $("sheetTitle").textContent=MOVES[i].name;
+  $("sheetCues").innerHTML=MOVES[i].cues.map(c=>`<li>${c}</li>`).join("");
+  $("sheet").hidden=false; sheetPlayer.set(MOVES[i]).play(); $("sheetClose").focus();
+}
+function closeSheet(){$("sheet").hidden=true;sheetPlayer.stop()}
+board.addEventListener("click",e=>{const b=e.target.closest(".show");if(b)openSheet(+b.dataset.i)});
+$("howNow").addEventListener("click",()=>openSheet(currentIdx()));
+$("sheetClose").addEventListener("click",closeSheet);
+$("sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("sheet").hidden)closeSheet()});
+$("sheetPrev").addEventListener("click",()=>openSheet((sheetIdx+6)%7));
+$("sheetNext").addEventListener("click",()=>openSheet((sheetIdx+1)%7));
+
 if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}
 </script>
 </body>

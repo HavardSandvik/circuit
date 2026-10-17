@@ -1,0 +1,95 @@
+{
+ "id": "bodyweight-squats",
+ "name": "Bodyweight squats",
+ "view": "side",
+ "duration": 2.4,
+ "cues": [
+  "Sit the hips back and down",
+  "Thighs to parallel, heels on the floor",
+  "Chest up; knees track over toes"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    0,
+    0.95
+   ],
+   "torso": 3,
+   "head": -1.7999999999999998,
+   "hands": {
+    "near": {
+     "from": "shoulder",
+     "d": [
+      0.02,
+      -0.55
+     ]
+    },
+    "far": {
+     "from": "shoulder",
+     "d": [
+      0.02,
+      -0.55
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.02,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 1.2,
+   "pelvis": [
+    -0.3,
+    0.5
+   ],
+   "torso": 42,
+   "head": -25.2,
+   "hands": {
+    "near": {
+     "from": "shoulder",
+     "d": [
+      0.52,
+      0.02
+     ]
+    },
+    "far": {
+     "from": "shoulder",
+     "d": [
+      0.52,
+      0.02
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.0,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.02,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,194 @@
+{
+ "id": "plank-shoulder-taps",
+ "name": "Plank shoulder taps",
+ "view": "side",
+ "duration": 2.0,
+ "cues": [
+  "High plank, feet a little wider than hips",
+  "Lift one hand to tap the opposite shoulder",
+  "Keep the hips still; alternate sides"
+ ],
+ "keys": [
+  {
+   "pelvis": [
+    -0.026,
+    0.525
+   ],
+   "torso": 72,
+   "head": -62,
+   "hands": {
+    "near": [
+     0.45,
+     0.1
+    ],
+    "far": [
+     0.45,
+     0.1
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    },
+    "far": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    }
+   },
+   "t": 0
+  },
+  {
+   "pelvis": [
+    -0.026,
+    0.525
+   ],
+   "torso": 72,
+   "head": -62,
+   "hands": {
+    "near": {
+     "from": "shoulder",
+     "d": [
+      -0.02,
+      -0.13
+     ]
+    },
+    "far": [
+     0.45,
+     0.1
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    },
+    "far": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    }
+   },
+   "t": 0.45
+  },
+  {
+   "pelvis": [
+    -0.026,
+    0.525
+   ],
+   "torso": 72,
+   "head": -62,
+   "hands": {
+    "near": [
+     0.45,
+     0.1
+    ],
+    "far": [
+     0.45,
+     0.1
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    },
+    "far": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    }
+   },
+   "t": 0.9
+  },
+  {
+   "pelvis": [
+    -0.026,
+    0.525
+   ],
+   "torso": 72,
+   "head": -62,
+   "hands": {
+    "near": [
+     0.45,
+     0.1
+    ],
+    "far": {
+     "from": "shoulder",
+     "d": [
+      -0.02,
+      -0.13
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    },
+    "far": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    }
+   },
+   "t": 1.35
+  },
+  {
+   "pelvis": [
+    -0.026,
+    0.525
+   ],
+   "torso": 72,
+   "head": -62,
+   "hands": {
+    "near": [
+     0.45,
+     0.1
+    ],
+    "far": [
+     0.45,
+     0.1
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    },
+    "far": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    }
+   },
+   "t": 1.8
+  }
+ ]
+}

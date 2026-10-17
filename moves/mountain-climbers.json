@@ -1,0 +1,83 @@
+{
+ "id": "mountain-climbers",
+ "name": "Mountain climbers",
+ "view": "side",
+ "duration": 0.9,
+ "cues": [
+  "Hands under shoulders, body in a straight line",
+  "Drive one knee towards your chest, then switch",
+  "Keep the hips level"
+ ],
+ "keys": [
+  {
+   "pelvis": [
+    -0.026,
+    0.525
+   ],
+   "torso": 72,
+   "head": -62,
+   "hands": {
+    "near": [
+     0.45,
+     0.1
+    ],
+    "far": [
+     0.45,
+     0.1
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.05,
+      0.28
+     ],
+     "f": -40
+    },
+    "far": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    }
+   },
+   "t": 0
+  },
+  {
+   "pelvis": [
+    -0.026,
+    0.525
+   ],
+   "torso": 72,
+   "head": -62,
+   "hands": {
+    "near": [
+     0.45,
+     0.1
+    ],
+    "far": [
+     0.45,
+     0.1
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.84,
+      0.21
+     ],
+     "f": -70
+    },
+    "far": {
+     "at": [
+      0.05,
+      0.28
+     ],
+     "f": -40
+    }
+   },
+   "t": 0.45
+  }
+ ]
+}

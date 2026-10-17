@@ -1,0 +1,183 @@
+{
+ "id": "pull-ups",
+ "name": "Pull-ups",
+ "view": "side",
+ "duration": 2.6,
+ "props": {
+  "bar": [
+   0.12,
+   2.3
+  ]
+ },
+ "cues": [
+  "Start from a full hang, arms straight",
+  "Pull your chest towards the bar until your chin clears it",
+  "Lower under control; no swinging"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    0.126,
+    1.253
+   ],
+   "torso": -6,
+   "head": 0,
+   "hands": {
+    "near": [
+     0.12,
+     2.27
+    ],
+    "far": [
+     0.12,
+     2.27
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": {
+      "from": "hip",
+      "d": [
+       -0.15,
+       -0.8
+      ]
+     },
+     "f": -60
+    },
+    "far": {
+     "at": {
+      "from": "hip",
+      "d": [
+       -0.1,
+       -0.81
+      ]
+     },
+     "f": -60
+    }
+   }
+  },
+  {
+   "t": 0.9,
+   "pelvis": [
+    0.044,
+    1.741
+   ],
+   "torso": -12,
+   "head": 8,
+   "hands": {
+    "near": [
+     0.12,
+     2.27
+    ],
+    "far": [
+     0.12,
+     2.27
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": {
+      "from": "hip",
+      "d": [
+       -0.15,
+       -0.8
+      ]
+     },
+     "f": -60
+    },
+    "far": {
+     "at": {
+      "from": "hip",
+      "d": [
+       -0.1,
+       -0.81
+      ]
+     },
+     "f": -60
+    }
+   }
+  },
+  {
+   "t": 1.25,
+   "pelvis": [
+    0.044,
+    1.741
+   ],
+   "torso": -12,
+   "head": 8,
+   "hands": {
+    "near": [
+     0.12,
+     2.27
+    ],
+    "far": [
+     0.12,
+     2.27
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": {
+      "from": "hip",
+      "d": [
+       -0.15,
+       -0.8
+      ]
+     },
+     "f": -60
+    },
+    "far": {
+     "at": {
+      "from": "hip",
+      "d": [
+       -0.1,
+       -0.81
+      ]
+     },
+     "f": -60
+    }
+   }
+  },
+  {
+   "t": 2.2,
+   "pelvis": [
+    0.126,
+    1.253
+   ],
+   "torso": -6,
+   "head": 0,
+   "hands": {
+    "near": [
+     0.12,
+     2.27
+    ],
+    "far": [
+     0.12,
+     2.27
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": {
+      "from": "hip",
+      "d": [
+       -0.15,
+       -0.8
+      ]
+     },
+     "f": -60
+    },
+    "far": {
+     "at": {
+      "from": "hip",
+      "d": [
+       -0.1,
+       -0.81
+      ]
+     },
+     "f": -60
+    }
+   }
+  }
+ ]
+}
