@@ -2,11 +2,11 @@
  "id": "burpees",
  "name": "Burpees",
  "view": "side",
- "duration": 3.0,
+ "duration": 3.5,
  "cues": [
-  "Squat and place your hands on the floor",
-  "Jump the feet back to a plank, then back in",
-  "Jump up with arms overhead and land softly"
+  "Squat, hands to the floor, and jump the feet back to a plank",
+  "Lower your chest all the way to the floor, then push back up",
+  "Jump the feet in, then jump up with arms overhead"
  ],
  "keys": [
   {
@@ -122,6 +122,41 @@
   },
   {
    "pelvis": [
+    0.05,
+    0.13
+   ],
+   "torso": 87,
+   "head": -17,
+   "hands": {
+    "near": [
+     0.45,
+     0.1
+    ],
+    "far": [
+     0.45,
+     0.1
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.8,
+      0.19
+     ],
+     "f": -45
+    },
+    "far": {
+     "at": [
+      -0.8,
+      0.19
+     ],
+     "f": -45
+    }
+   },
+   "t": 1.4
+  },
+  {
+   "pelvis": [
     -0.026,
     0.525
    ],
@@ -153,7 +188,7 @@
      "f": -70
     }
    },
-   "t": 1.45
+   "t": 1.85
   },
   {
    "pelvis": [
@@ -188,7 +223,7 @@
      "f": 0
     }
    },
-   "t": 1.9
+   "t": 2.35
   },
   {
    "pelvis": [
@@ -235,7 +270,7 @@
      "f": -60
     }
    },
-   "t": 2.45
+   "t": 2.9
   }
  ]
 }

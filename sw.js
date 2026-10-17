@@ -1,5 +1,5 @@
 // Offline support: cache the app shell, serve cache-first, refresh in the background.
-const CACHE = 'circuit-v2';
+const CACHE = 'circuit-v3';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'icon-180.png', 'icon-192.png', 'icon-512.png', 'mannequin.js',
   'moves/jumping-jacks.json', 'moves/pull-ups.json', 'moves/bodyweight-squats.json', 'moves/mountain-climbers.json',
   'moves/reverse-lunges.json', 'moves/plank-shoulder-taps.json', 'moves/burpees.json'];
