@@ -36,10 +36,10 @@
     return p;
   }
 
-  /* A target is [x, y] in world space, or { from: "hip" | "shoulder" | "pelvis", d: [dx, dy] } relative to the body. */
+  /* A target is [x, y] in world space, or { from: "hip" | "shoulder" | "pelvis" | "head", d: [dx, dy] } relative to the body. */
   function resolve(spec, p, side) {
     if (Array.isArray(spec)) return spec;
-    const o = spec.from === 'pelvis' ? p.pelvis : p[spec.from][side];
+    const o = spec.from === 'pelvis' ? p.pelvis : spec.from === 'head' ? p.headC : p[spec.from][side];
     return add(o, spec.d);
   }
 
@@ -123,7 +123,10 @@
         x0 = Math.min(x0, q[0]); x1 = Math.max(x1, q[0]); y1 = Math.max(y1, q[1]);
       }
     }
-    if (move.props && move.props.bar) { const b = move.props.bar; x0 = Math.min(x0, b[0] - 0.1); x1 = Math.max(x1, b[0] + 0.1); y1 = Math.max(y1, b[1] + 0.25); }
+    const pr = move.props || {};
+    if (pr.bar) { const b = pr.bar; x0 = Math.min(x0, b[0] - 0.1); x1 = Math.max(x1, b[0] + 0.1); y1 = Math.max(y1, b[1] + 0.25); }
+    if (pr.wall != null) { x0 = Math.min(x0, pr.wall - 0.06); x1 = Math.max(x1, pr.wall + 0.06); y1 = Math.max(y1, 1.6); }
+    if (pr.bench) { const b = pr.bench; x0 = Math.min(x0, b[0] - 0.02); x1 = Math.max(x1, b[1] + 0.02); }
     return { x0: x0 - 0.12, x1: x1 + 0.12, y0: -0.06, y1: y1 + 0.08 };
   }
 
@@ -143,6 +146,17 @@
       const b = X(move.props.bar);
       ctx.strokeStyle = colors.line; seg(ctx, [b[0], 0], [b[0], b[1] - 0.04 * s], 3);
       ctx.fillStyle = colors.prop; ctx.beginPath(); ctx.arc(b[0], b[1], 0.035 * s, 0, Math.PI * 2); ctx.fill();
+    }
+
+    if (move.props && move.props.wall != null) {
+      const w = move.props.wall, ww = 0.05 * s, top = X([w, Math.max(1.6, box.y1)]), g = X([w, 0]);
+      ctx.fillStyle = colors.line; ctx.fillRect(top[0] + (w > 0 ? 0 : -ww), 0, ww, g[1] + 1.5);
+    }
+    if (move.props && move.props.bench) {
+      const [b0, b1, by] = move.props.bench, a = X([b0, by]), b = X([b1, by]);
+      ctx.strokeStyle = colors.line; ctx.lineCap = 'butt';
+      seg(ctx, a, b, 0.05 * s); seg(ctx, X([b0 + 0.04, by]), X([b0 + 0.04, 0]), 0.035 * s); seg(ctx, X([b1 - 0.04, by]), X([b1 - 0.04, 0]), 0.035 * s);
+      ctx.lineCap = 'round';
     }
 
     const limb = (side, col) => {

@@ -1,0 +1,83 @@
+{
+ "id": "plank",
+ "name": "Plank",
+ "view": "side",
+ "duration": 3.0,
+ "cues": [
+  "Forearms on the floor, elbows under the shoulders",
+  "Body in a straight line from head to heels",
+  "Brace your stomach; don't let the hips sag"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    -0.096,
+    0.316
+   ],
+   "torso": 82.7,
+   "head": -15,
+   "hands": {
+    "near": [
+     0.66,
+     0.06
+    ],
+    "far": [
+     0.66,
+     0.06
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.959,
+      0.206
+     ],
+     "f": -70
+    },
+    "far": {
+     "at": [
+      -0.959,
+      0.206
+     ],
+     "f": -70
+    }
+   }
+  },
+  {
+   "t": 1.5,
+   "pelvis": [
+    -0.096,
+    0.326
+   ],
+   "torso": 82.0,
+   "head": -15,
+   "hands": {
+    "near": [
+     0.66,
+     0.06
+    ],
+    "far": [
+     0.66,
+     0.06
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      -0.959,
+      0.206
+     ],
+     "f": -70
+    },
+    "far": {
+     "at": [
+      -0.959,
+      0.206
+     ],
+     "f": -70
+    }
+   }
+  }
+ ]
+}

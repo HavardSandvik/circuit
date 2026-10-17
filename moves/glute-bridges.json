@@ -1,0 +1,118 @@
+{
+ "id": "glute-bridges",
+ "name": "Glute bridges",
+ "view": "side",
+ "duration": 3.0,
+ "cues": [
+  "Lie on your back, knees bent, feet flat on the floor",
+  "Drive through the heels to lift the hips",
+  "Squeeze the glutes at the top, then lower slowly"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    0,
+    0.12
+   ],
+   "torso": -88,
+   "head": 8,
+   "hands": {
+    "near": [
+     0.05,
+     0.07
+    ],
+    "far": [
+     0.05,
+     0.07
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.38,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.38,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 1.0,
+   "pelvis": [
+    -0.088,
+    0.42
+   ],
+   "torso": -124.5,
+   "head": 44.5,
+   "hands": {
+    "near": [
+     0.05,
+     0.07
+    ],
+    "far": [
+     0.05,
+     0.07
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.38,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.38,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 1.8,
+   "pelvis": [
+    -0.088,
+    0.42
+   ],
+   "torso": -124.5,
+   "head": 44.5,
+   "hands": {
+    "near": [
+     0.05,
+     0.07
+    ],
+    "far": [
+     0.05,
+     0.07
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.38,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.38,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  }
+ ]
+}

@@ -1,1 +1,58 @@
-["jumping-jacks", "pull-ups", "bodyweight-squats", "mountain-climbers", "reverse-lunges", "plank-shoulder-taps", "burpees"]
+[
+ {
+  "id": "jumping-jacks",
+  "name": "Jumping jacks"
+ },
+ {
+  "id": "pull-ups",
+  "name": "Pull-ups"
+ },
+ {
+  "id": "bodyweight-squats",
+  "name": "Bodyweight squats"
+ },
+ {
+  "id": "mountain-climbers",
+  "name": "Mountain climbers"
+ },
+ {
+  "id": "reverse-lunges",
+  "name": "Reverse lunges"
+ },
+ {
+  "id": "plank-shoulder-taps",
+  "name": "Plank shoulder taps"
+ },
+ {
+  "id": "burpees",
+  "name": "Burpees"
+ },
+ {
+  "id": "push-ups",
+  "name": "Push-ups"
+ },
+ {
+  "id": "wall-push-ups",
+  "name": "Wall push-ups"
+ },
+ {
+  "id": "tricep-dips",
+  "name": "Tricep dips"
+ },
+ {
+  "id": "plank",
+  "name": "Plank"
+ },
+ {
+  "id": "wall-sit",
+  "name": "Wall sit"
+ },
+ {
+  "id": "glute-bridges",
+  "name": "Glute bridges"
+ },
+ {
+  "id": "bicycle-crunches",
+  "name": "Bicycle crunches"
+ }
+]

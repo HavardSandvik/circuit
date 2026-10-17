@@ -1,8 +1,8 @@
-# Seven Minute Circuit
+# Circuit
 
-Interval timer for a 7-station calisthenics circuit: 40 seconds on, 20 seconds off, with beeps, spoken cues and vibration. Single static page, works offline, installable to the home screen.
+Interval timer for bodyweight circuits, with beeps, spoken cues and vibration. Single static page, works offline, installable to the home screen.
 
-Stations: jumping jacks, pull-ups, bodyweight squats, mountain climbers, reverse lunges, plank shoulder taps, burpees.
+The default workout is 7 exercises at 40 seconds on, 20 seconds off. **Edit** changes work, rest and get-ready times, the number of rounds, and the exercise list (add, remove, reorder from a pool of 14). Settings are saved in the browser.
 
 ## Exercise demos
 

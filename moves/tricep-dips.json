@@ -1,0 +1,125 @@
+{
+ "id": "tricep-dips",
+ "name": "Tricep dips",
+ "view": "side",
+ "duration": 2.4,
+ "props": {
+  "bench": [
+   -0.7,
+   -0.25,
+   0.45
+  ]
+ },
+ "cues": [
+  "Hands on the edge of a sturdy chair or bench, fingers forward",
+  "Bend the elbows straight back to about 90 degrees",
+  "Press back up; keep your back close to the bench"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    -0.15,
+    0.628
+   ],
+   "torso": -10.4,
+   "head": 8,
+   "hands": {
+    "near": [
+     -0.28,
+     0.54
+    ],
+    "far": [
+     -0.28,
+     0.54
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.35,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.37,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 1.1,
+   "pelvis": [
+    -0.136,
+    0.35
+   ],
+   "torso": -5,
+   "head": 5,
+   "hands": {
+    "near": [
+     -0.28,
+     0.54
+    ],
+    "far": [
+     -0.28,
+     0.54
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.35,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.37,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 1.3,
+   "pelvis": [
+    -0.136,
+    0.35
+   ],
+   "torso": -5,
+   "head": 5,
+   "hands": {
+    "near": [
+     -0.28,
+     0.54
+    ],
+    "far": [
+     -0.28,
+     0.54
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.35,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.37,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  }
+ ]
+}

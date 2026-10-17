@@ -1,0 +1,95 @@
+{
+ "id": "bicycle-crunches",
+ "name": "Bicycle crunches",
+ "view": "side",
+ "duration": 1.8,
+ "cues": [
+  "Lie on your back, hands lightly behind your head, shoulders off the floor",
+  "Bring one knee in as you rotate the opposite elbow towards it",
+  "Extend the other leg; alternate in a pedalling motion"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    0,
+    0.105
+   ],
+   "torso": -64,
+   "head": 10,
+   "hands": {
+    "near": {
+     "from": "head",
+     "d": [
+      0.0,
+      0.0
+     ]
+    },
+    "far": {
+     "from": "head",
+     "d": [
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.3,
+      0.45
+     ],
+     "f": -20
+    },
+    "far": {
+     "at": [
+      0.85,
+      0.3
+     ],
+     "f": 10
+    }
+   }
+  },
+  {
+   "t": 0.9,
+   "pelvis": [
+    0,
+    0.105
+   ],
+   "torso": -64,
+   "head": 10,
+   "hands": {
+    "near": {
+     "from": "head",
+     "d": [
+      0.0,
+      0.0
+     ]
+    },
+    "far": {
+     "from": "head",
+     "d": [
+      0.0,
+      0.0
+     ]
+    }
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.85,
+      0.3
+     ],
+     "f": 10
+    },
+    "far": {
+     "at": [
+      0.3,
+      0.45
+     ],
+     "f": -20
+    }
+   }
+  }
+ ]
+}

@@ -10,11 +10,11 @@
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-180.png">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
-<title>Seven Minute Circuit</title>
+<title>Circuit</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;800;900&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 <style>
-/* Layout: one-screen gym clock — phase band, big ring timer, controls, then the 7-station board */
+/* Layout: one-screen gym clock — ring timer, demo, controls, then the station board; settings in a bottom sheet */
 :root{
   --bg:#eef0ec; --surface:#ffffff; --fg:#14202b; --muted:#5d6a72; --line:#d3d8d3;
   --work:#e0461f; --rest:#1f8a7a; --ready:#c99a14; --track:#dde2dc; --fig:#14202b; --fig-far:#a3aca8;
@@ -81,16 +81,36 @@ button:disabled{opacity:.4;cursor:default}
 .sheet canvas{width:100%;height:min(300px,42vh);display:block;background:var(--bg);border-radius:12px}
 .sheet ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
 .sheet-nav{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.head-r{display:flex;align-items:center;gap:10px}
+.edit{padding:7px 12px;font-size:13px;border-radius:999px}
+.sheet.settings{z-index:15}
+.group{display:flex;flex-direction:column;gap:8px}
+.group h3{font-family:var(--display);font-weight:800;font-size:16px;letter-spacing:.12em;text-transform:uppercase;margin:0;color:var(--muted)}
+.steppers{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.stepper{border:1px solid var(--line);border-radius:12px;padding:8px 10px;display:flex;flex-direction:column;gap:4px}
+.stepper label{font-size:12.5px;color:var(--muted)}
+.stepper .row{display:grid;grid-template-columns:40px 1fr 40px;align-items:center;gap:6px}
+.stepper button{padding:6px 0;border-radius:9px;font-size:18px;line-height:1}
+.stepper output{text-align:center;font-family:var(--display);font-weight:800;font-size:22px;font-variant-numeric:tabular-nums}
+.summary{font-size:13px;color:var(--muted);margin:0;font-variant-numeric:tabular-nums}
+.elist{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.elist li{display:grid;grid-template-columns:1.8em 1fr auto;align-items:center;gap:6px;padding:6px 0;border-bottom:1px solid var(--line)}
+.elist .n{font-family:var(--display);font-weight:800;color:var(--muted)}
+.elist .nm{background:none;border:0;padding:6px 0;text-align:left;font-weight:500;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.elist .acts{display:flex;gap:4px}
+.elist .acts button{padding:6px 9px;border-radius:9px;font-size:14px;line-height:1;min-width:34px}
+.add-row{display:grid;grid-template-columns:1fr auto;gap:8px}
+select{font:inherit;padding:12px 10px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);min-width:0}
+.sheet-foot{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .note{font-size:12.5px;color:var(--muted);margin:0}
 @media (prefers-reduced-motion:reduce){.ring .arc{transition:none}}
 </style>
 </head>
 <body>
-
 <div class="wrap">
   <header>
-    <h1>Seven Minute Circuit</h1>
-    <span class="meta" id="total">7:00 total</span>
+    <h1>Circuit</h1>
+    <div class="head-r"><span class="meta" id="total"></span><button class="edit" id="editBtn" type="button">Edit</button></div>
   </header>
 
   <section class="clock" id="clock" data-phase="ready" aria-live="polite">
@@ -102,9 +122,9 @@ button:disabled{opacity:.4;cursor:default}
       </svg>
       <div class="secs" id="secs">10</div>
     </div>
-    <div class="exercise" id="ex">Jumping jacks</div>
+    <div class="exercise" id="ex">Loading</div>
     <div class="demo-row"><canvas class="demo" id="demo" aria-label="Animated demonstration"></canvas><button class="link" id="howNow" type="button">How to do it</button></div>
-    <div class="next" id="next">40s on · 20s off · 7 stations</div>
+    <div class="next" id="next"></div>
   </section>
 
   <div class="controls">
@@ -120,32 +140,77 @@ button:disabled{opacity:.4;cursor:default}
   </div>
 
   <ol class="board" id="board"></ol>
-  <div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
-    <div class="sheet-card">
-      <div class="sheet-head"><h2 id="sheetTitle">Exercise</h2><button id="sheetClose" type="button">Close</button></div>
-      <canvas id="sheetCanvas" aria-label="Animated demonstration"></canvas>
-      <ul id="sheetCues"></ul>
-      <div class="sheet-nav"><button id="sheetPrev" type="button">Previous</button><button id="sheetNext" type="button">Next</button></div>
-    </div>
-  </div>
   <p class="note">Keep this page open and on screen while you train. Your phone's silent switch may mute the beeps.</p>
+</div>
+
+<div class="sheet settings" id="settings" hidden role="dialog" aria-modal="true" aria-labelledby="setTitle">
+  <div class="sheet-card">
+    <div class="sheet-head"><h2 id="setTitle">Edit workout</h2><button id="setDone" type="button">Done</button></div>
+    <div class="group">
+      <h3>Timings</h3>
+      <div class="steppers" id="steppers"></div>
+      <p class="summary" id="setSummary"></p>
+    </div>
+    <div class="group">
+      <h3>Exercises</h3>
+      <ol class="elist" id="elist"></ol>
+      <div class="add-row"><select id="addSel" aria-label="Exercise to add"></select><button id="addBtn" type="button">Add</button></div>
+    </div>
+    <div class="sheet-foot"><button id="setDefault" type="button">Restore default</button><button id="setDone2" type="button">Done</button></div>
+  </div>
+</div>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+  <div class="sheet-card">
+    <div class="sheet-head"><h2 id="sheetTitle">Exercise</h2><button id="sheetClose" type="button">Close</button></div>
+    <canvas id="sheetCanvas" aria-label="Animated demonstration"></canvas>
+    <ul id="sheetCues"></ul>
+    <div class="sheet-nav"><button id="sheetPrev" type="button">Previous</button><button id="sheetNext" type="button">Next</button></div>
+  </div>
 </div>
 
 <script src="mannequin.js"></script>
 <script>
-const EX=["Jumping jacks","Pull-ups","Bodyweight squats","Mountain climbers","Reverse lunges","Plank shoulder taps","Burpees"];
-const WORK=40, REST=20, READY=10;
-const plan=[{type:"ready",dur:READY,i:0}];
-EX.forEach((_,i)=>{plan.push({type:"work",dur:WORK,i});if(i<EX.length-1)plan.push({type:"rest",dur:REST,i:i+1});});
-
 const $=id=>document.getElementById(id);
-const C=2*Math.PI*52;
-let step=0, remaining=plan[0].dur*1000, endAt=0, running=false, timer=null, lastWhole=null, finished=false;
-let ctx=null, wake=null;
+const DEFAULT={work:40,rest:20,ready:10,rounds:1,
+  exercises:["jumping-jacks","pull-ups","bodyweight-squats","mountain-climbers","reverse-lunges","plank-shoulder-taps","burpees"]};
+const KEY="circuit.config.v1";
+const POOL=[], MOVES={};           // pool: [{id,name}], MOVES: id -> motion
+let cfg=null, plan=[], EX=[];      // EX: names of the current workout
 
+/* ---------- config ---------- */
+function clone(o){return JSON.parse(JSON.stringify(o))}
+function loadCfg(){
+  let c=null; try{c=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+  if(!c||!Array.isArray(c.exercises))c=clone(DEFAULT);
+  const known=new Set(POOL.map(p=>p.id));
+  c.exercises=c.exercises.filter(id=>known.has(id));
+  if(!c.exercises.length)c.exercises=clone(DEFAULT.exercises);
+  for(const k of ["work","rest","ready","rounds"])if(!Number.isFinite(c[k]))c[k]=DEFAULT[k];
+  return c;
+}
+function saveCfg(){try{localStorage.setItem(KEY,JSON.stringify(cfg))}catch(e){}}
+const nameOf=id=>(POOL.find(p=>p.id===id)||{name:id}).name;
+function fmt(sec){return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,"0")}`}
+function totalSecs(c){const n=c.exercises.length*c.rounds;return c.ready+n*c.work+(n-1)*c.rest}
+
+function buildPlan(){
+  EX=cfg.exercises.map(nameOf);
+  plan=[{type:"ready",dur:cfg.ready,i:0,r:1}];
+  for(let r=1;r<=cfg.rounds;r++)cfg.exercises.forEach((_,i)=>{
+    plan.push({type:"work",dur:cfg.work,i,r});
+    const last=r===cfg.rounds&&i===cfg.exercises.length-1;
+    if(!last&&cfg.rest>0)plan.push({type:"rest",dur:cfg.rest,i:(i+1)%cfg.exercises.length,r:i+1===cfg.exercises.length?r+1:r});
+  });
+  if(cfg.ready<=0)plan.shift();
+  board.innerHTML=EX.map((e,i)=>`<li data-i="${i}"><span class="n">${i+1}</span><span class="name">${e}</span><span class="t"></span><button class="show" type="button" data-i="${i}" aria-label="Show ${e}">Show</button></li>`).join("");
+}
+
+/* ---------- timer ---------- */
 const board=$("board");
-board.innerHTML=EX.map((e,i)=>`<li data-i="${i}"><span class="n">${i+1}</span><span class="name">${e}</span><span class="t"></span><button class="show" type="button" data-i="${i}" aria-label="Show ${e}">Show</button></li>`).join("");
-board.querySelectorAll(".t").forEach((t,i)=>t.textContent=`${i}:00–${i}:40`);
+const C=2*Math.PI*52;
+let step=0, remaining=0, endAt=0, running=false, timer=null, lastWhole=null, finished=false;
+let ctx=null, wake=null;
 
 function opt(id){return $(id).checked}
 function beep(freq=880,ms=120,vol=.25){
@@ -161,7 +226,6 @@ function say(text){
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(text);u.rate=1.05;speechSynthesis.speak(u);}catch(e){}
 }
 function buzz(p){if(opt("optBuzz")&&navigator.vibrate){try{navigator.vibrate(p)}catch(e){}}}
-
 async function lockScreen(){
   try{if("wakeLock" in navigator&&!wake){wake=await navigator.wakeLock.request("screen");wake.addEventListener("release",()=>wake=null);}}catch(e){}
 }
@@ -172,7 +236,7 @@ function enter(n){
   step=n; remaining=plan[n].dur*1000; endAt=performance.now()+remaining; lastWhole=null;
   const p=plan[n];
   if(p.type==="work"){beep(1320,350,.3);buzz([250]);say(EX[p.i]);}
-  else if(p.type==="rest"){beep(660,350,.3);buzz([120,80,120]);say(`Rest. Next, ${EX[p.i]}`);}
+  else if(p.type==="rest"){beep(660,350,.3);buzz([120,80,120]);say(p.i===0&&cfg.rounds>1?`Rest. Round ${p.r}. Next, ${EX[p.i]}`:`Rest. Next, ${EX[p.i]}`);}
   render();
 }
 function finish(){
@@ -180,7 +244,9 @@ function finish(){
   beep(1320,180);setTimeout(()=>beep(1320,180),250);setTimeout(()=>beep(1760,500),500);
   buzz([200,100,200,100,400]);say("Done. Good work.");
   $("clock").dataset.phase="rest";$("phase").textContent="Complete";$("secs").textContent="✓";
-  $("arc").style.strokeDashoffset=0;$("ex").textContent="Circuit done";$("next").textContent="7 stations, 7 minutes";
+  $("arc").style.strokeDashoffset=0;$("ex").textContent="Circuit done";
+  $("next").textContent=`${EX.length} exercises${cfg.rounds>1?` × ${cfg.rounds} rounds`:""}, ${fmt(totalSecs(cfg))}`;
+  $("total").textContent=fmt(totalSecs(cfg))+" total";
   $("go").textContent="Again";$("skip").disabled=true;
   board.querySelectorAll("li").forEach(li=>{li.className="done"});
 }
@@ -197,63 +263,116 @@ function tick(){
 }
 function render(){
   const p=plan[step], whole=Math.ceil(remaining/1000);
+  const rnd=cfg.rounds>1?` · Round ${p.r}/${cfg.rounds}`:"";
   $("clock").dataset.phase=p.type;
-  $("phase").textContent=p.type==="work"?`Work · ${p.i+1} of 7`:p.type==="rest"?"Rest":"Get ready";
+  $("phase").textContent=p.type==="work"?`Work · ${p.i+1} of ${EX.length}${rnd}`:p.type==="rest"?`Rest${rnd}`:"Get ready";
   $("secs").textContent=whole;
   $("arc").style.strokeDashoffset=C*(1-remaining/(p.dur*1000));
   $("ex").textContent=EX[p.i];
   const nx=plan.slice(step+1).find(q=>q.type==="work");
   $("next").innerHTML=p.type==="work"?(nx?`Next: <b>${EX[nx.i]}</b>`:"Last one"):(p.type==="rest"?"Up next":"First up");
-  const left=plan.slice(step+1).reduce((s,q)=>s+q.dur,0)+whole;
-  $("total").textContent=`${Math.floor(left/60)}:${String(left%60).padStart(2,"0")} left`;
-  const cur=p.type==="work"?p.i:-1, doneTo=p.type==="work"?p.i:p.i;
-  board.querySelectorAll("li").forEach((li,i)=>{li.className=i===cur?"now":(i<doneTo?"done":"")});
+  if(running||step>0||remaining<p.dur*1000){
+    const left=plan.slice(step+1).reduce((s,q)=>s+q.dur,0)+whole;
+    $("total").textContent=fmt(left)+" left";
+  } else $("total").textContent=fmt(totalSecs(cfg))+" total";
+  const cur=p.type==="work"?p.i:-1;
+  board.querySelectorAll("li").forEach((li,i)=>{li.className=i===cur?"now":(i<p.i?"done":"")});
+  syncDemo(false);
 }
 function start(){
   if(finished){reset();}
   if(!ctx){try{ctx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}
   try{ctx&&ctx.state==="suspended"&&ctx.resume()}catch(e){}
+  const fresh=step===0&&remaining===plan[0].dur*1000;
   running=true; endAt=performance.now()+remaining;
-  if(step===0&&remaining===READY*1000){beep(880,80,.15);say("Get ready. First, jumping jacks");}
+  if(fresh){ if(plan[0].type==="ready"){beep(880,80,.15);say(`Get ready. First, ${EX[0]}`);} else enter(0); }
   lockScreen(); clearInterval(timer); timer=setInterval(tick,100);
   $("go").textContent="Pause";$("skip").disabled=false;
 }
 function pause(){running=false;clearInterval(timer);remaining=Math.max(0,endAt-performance.now());$("go").textContent="Resume";unlockScreen();try{speechSynthesis.cancel()}catch(e){}}
 function reset(){
   running=false;finished=false;clearInterval(timer);unlockScreen();
-  step=0;remaining=READY*1000;lastWhole=null;$("go").textContent="Start";$("skip").disabled=false;render();
-  $("total").textContent="7:00 total";
+  step=0;remaining=plan[0].dur*1000;lastWhole=null;$("go").textContent="Start";$("skip").disabled=false;render();
 }
 $("go").addEventListener("click",()=>running?pause():start());
 $("reset").addEventListener("click",reset);
 $("skip").addEventListener("click",()=>{if(finished)return; if(step+1<plan.length){enter(step+1);if(running)endAt=performance.now()+remaining;}else finish();});
-render();$("total").textContent="7:00 total";
-/* exercise demos */
-const IDS=["jumping-jacks","pull-ups","bodyweight-squats","mountain-climbers","reverse-lunges","plank-shoulder-taps","burpees"];
-const MOVES=[]; let demoIdx=-1, sheetIdx=0;
+
+/* ---------- demos ---------- */
+let demoId=null, sheetList=[], sheetIdx=0;
 const demoPlayer=Mannequin.Player($("demo")), sheetPlayer=Mannequin.Player($("sheetCanvas"));
-Promise.all(IDS.map(id=>fetch("moves/"+id+".json").then(r=>r.json()))).then(ms=>{ms.forEach((m,i)=>MOVES[i]=m);syncDemo(true)}).catch(()=>{$("demo").hidden=true});
-function currentIdx(){return finished?0:plan[step].i}
+function currentId(){return cfg.exercises[finished?0:plan[step].i]}
 function syncDemo(force){
-  const i=currentIdx();
-  if(!MOVES[i]||(!force&&i===demoIdx))return;
-  demoIdx=i; demoPlayer.set(MOVES[i]).play();
+  const id=currentId();
+  if(!MOVES[id]||(!force&&id===demoId))return;
+  demoId=id; demoPlayer.set(MOVES[id]).play();
 }
-const _render=render; render=function(){_render();syncDemo(false)};
-function openSheet(i){
-  if(!MOVES[i])return; sheetIdx=i;
-  $("sheetTitle").textContent=MOVES[i].name;
-  $("sheetCues").innerHTML=MOVES[i].cues.map(c=>`<li>${c}</li>`).join("");
-  $("sheet").hidden=false; sheetPlayer.set(MOVES[i]).play(); $("sheetClose").focus();
+function openSheet(list,i){
+  sheetList=list; sheetIdx=(i+list.length)%list.length;
+  const m=MOVES[sheetList[sheetIdx]]; if(!m)return;
+  $("sheetTitle").textContent=m.name;
+  $("sheetCues").innerHTML=m.cues.map(c=>`<li>${c}</li>`).join("");
+  $("sheetPrev").hidden=$("sheetNext").hidden=list.length<2;
+  $("sheet").hidden=false; sheetPlayer.set(m).play(); $("sheetClose").focus();
 }
 function closeSheet(){$("sheet").hidden=true;sheetPlayer.stop()}
-board.addEventListener("click",e=>{const b=e.target.closest(".show");if(b)openSheet(+b.dataset.i)});
-$("howNow").addEventListener("click",()=>openSheet(currentIdx()));
+board.addEventListener("click",e=>{const b=e.target.closest(".show");if(b)openSheet(cfg.exercises,+b.dataset.i)});
+$("howNow").addEventListener("click",()=>openSheet(cfg.exercises,cfg.exercises.indexOf(currentId())));
 $("sheetClose").addEventListener("click",closeSheet);
 $("sheet").addEventListener("click",e=>{if(e.target.id==="sheet")closeSheet()});
-document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!$("sheet").hidden)closeSheet()});
-$("sheetPrev").addEventListener("click",()=>openSheet((sheetIdx+6)%7));
-$("sheetNext").addEventListener("click",()=>openSheet((sheetIdx+1)%7));
+$("sheetPrev").addEventListener("click",()=>openSheet(sheetList,sheetIdx-1));
+$("sheetNext").addEventListener("click",()=>openSheet(sheetList,sheetIdx+1));
+
+/* ---------- settings ---------- */
+const STEPS=[
+  {k:"work",label:"Work",unit:"s",step:5,min:5,max:300},
+  {k:"rest",label:"Rest",unit:"s",step:5,min:0,max:300},
+  {k:"ready",label:"Get ready",unit:"s",step:5,min:0,max:60},
+  {k:"rounds",label:"Rounds",unit:"",step:1,min:1,max:10}];
+let draft=null;
+function renderSettings(){
+  $("steppers").innerHTML=STEPS.map(s=>`<div class="stepper"><label id="lb-${s.k}">${s.label}</label><div class="row">
+    <button type="button" data-k="${s.k}" data-d="-1" aria-label="Less ${s.label}">−</button>
+    <output aria-labelledby="lb-${s.k}">${draft[s.k]}${s.unit}</output>
+    <button type="button" data-k="${s.k}" data-d="1" aria-label="More ${s.label}">+</button></div></div>`).join("");
+  const n=draft.exercises.length;
+  $("setSummary").textContent=`${n} exercise${n===1?"":"s"}${draft.rounds>1?` × ${draft.rounds} rounds`:""} · ${fmt(totalSecs(draft))} in total`;
+  $("elist").innerHTML=draft.exercises.map((id,i)=>`<li><span class="n">${i+1}</span>
+    <button class="nm" type="button" data-show="${i}">${nameOf(id)}</button>
+    <span class="acts"><button type="button" data-up="${i}" aria-label="Move ${nameOf(id)} up" ${i===0?"disabled":""}>↑</button><button type="button" data-down="${i}" aria-label="Move ${nameOf(id)} down" ${i===n-1?"disabled":""}>↓</button><button type="button" data-del="${i}" aria-label="Remove ${nameOf(id)}" ${n===1?"disabled":""}>✕</button></span></li>`).join("");
+  $("addSel").innerHTML=POOL.map(p=>`<option value="${p.id}">${p.name}${draft.exercises.includes(p.id)?" (in workout)":""}</option>`).join("");
+  const firstUnused=POOL.find(p=>!draft.exercises.includes(p.id)); if(firstUnused)$("addSel").value=firstUnused.id;
+}
+function openSettings(){ if(running)pause(); draft=clone(cfg); renderSettings(); $("settings").hidden=false; $("setDone").focus(); }
+function closeSettings(){
+  $("settings").hidden=true;
+  if(JSON.stringify(draft)!==JSON.stringify(cfg)){cfg=draft;saveCfg();buildPlan();finished=false;reset();demoId=null;syncDemo(true);}
+}
+$("editBtn").addEventListener("click",openSettings);
+$("setDone").addEventListener("click",closeSettings);
+$("setDone2").addEventListener("click",closeSettings);
+$("settings").addEventListener("click",e=>{
+  if(e.target.id==="settings")return closeSettings();
+  const b=e.target.closest("button"); if(!b)return;
+  const d=b.dataset;
+  if(d.k){const s=STEPS.find(x=>x.k===d.k);draft[s.k]=Math.min(s.max,Math.max(s.min,draft[s.k]+s.step*(+d.d)));}
+  else if(d.up){const i=+d.up;[draft.exercises[i-1],draft.exercises[i]]=[draft.exercises[i],draft.exercises[i-1]];}
+  else if(d.down){const i=+d.down;[draft.exercises[i+1],draft.exercises[i]]=[draft.exercises[i],draft.exercises[i+1]];}
+  else if(d.del){draft.exercises.splice(+d.del,1);}
+  else if(d.show){return openSheet(draft.exercises,+d.show);}
+  else return;
+  renderSettings();
+});
+$("addBtn").addEventListener("click",()=>{draft.exercises.push($("addSel").value);renderSettings();});
+$("setDefault").addEventListener("click",()=>{draft=clone(DEFAULT);renderSettings();});
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return; if(!$("sheet").hidden)closeSheet(); else if(!$("settings").hidden)closeSettings();});
+
+/* ---------- start-up ---------- */
+fetch("moves/index.json").then(r=>r.json()).then(list=>{
+  POOL.push(...list);
+  cfg=loadCfg(); buildPlan(); reset();
+  return Promise.all(POOL.map(p=>fetch("moves/"+p.id+".json").then(r=>r.json()).then(m=>{MOVES[p.id]=m;})));
+}).then(()=>syncDemo(true)).catch(()=>{$("ex").textContent="Couldn't load exercises";$("demo").hidden=true});
 
 if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}
 </script>

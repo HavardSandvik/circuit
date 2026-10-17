@@ -1,0 +1,86 @@
+{
+ "id": "wall-sit",
+ "name": "Wall sit",
+ "view": "side",
+ "duration": 3.0,
+ "props": {
+  "wall": -0.25
+ },
+ "cues": [
+  "Back flat against the wall",
+  "Slide down until your thighs are parallel to the floor",
+  "Knees over ankles; hold the position"
+ ],
+ "keys": [
+  {
+   "t": 0,
+   "pelvis": [
+    -0.155,
+    0.52
+   ],
+   "torso": 0,
+   "head": 0,
+   "hands": {
+    "near": [
+     0.15,
+     0.6
+    ],
+    "far": [
+     0.15,
+     0.6
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.3,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.32,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  },
+  {
+   "t": 1.5,
+   "pelvis": [
+    -0.155,
+    0.512
+   ],
+   "torso": 0,
+   "head": 2,
+   "hands": {
+    "near": [
+     0.15,
+     0.6
+    ],
+    "far": [
+     0.15,
+     0.6
+    ]
+   },
+   "feet": {
+    "near": {
+     "at": [
+      0.3,
+      0.085
+     ],
+     "f": 0
+    },
+    "far": {
+     "at": [
+      0.32,
+      0.085
+     ],
+     "f": 0
+    }
+   }
+  }
+ ]
+}
