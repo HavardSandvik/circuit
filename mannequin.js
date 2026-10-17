@@ -87,6 +87,11 @@
     const bend = Object.assign({}, DEFAULT_BEND[view === 'front' ? 'front' : 'side'], move.bend || {});
 
     p.arms = {}; p.legs = {};
+    // optional per-side shoulder offsets (e.g. trunk rotation seen from the side)
+    for (const s of sides(move)) {
+      const o0 = (k0.shoulders && k0.shoulders[s]) || [0, 0], o1 = (k1.shoulders && k1.shoulders[s]) || [0, 0];
+      p.shoulder[s] = add(p.shoulder[s], lerp2(o0, o1, u));
+    }
     for (const s of sides(move)) {
       const hT = blendTarget(k0.hands[s], k1.hands[s], u, p0, p1, p, s);
       const a = ik(p.shoulder[s], hT, SEG.upper, SEG.fore, bend.arm[s]);
