@@ -2,7 +2,7 @@
  "id": "mountain-climbers",
  "name": "Mountain climbers",
  "view": "side",
- "duration": 0.9,
+ "duration": 1.4,
  "cues": [
   "Hands under shoulders, body in a straight line",
   "Drive one knee towards your chest, then switch",
@@ -77,7 +77,7 @@
      "f": -40
     }
    },
-   "t": 0.45
+   "t": 0.7
   }
  ]
 }
